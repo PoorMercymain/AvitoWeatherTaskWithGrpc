@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  grpcserver:
+    build: ./server/
+    ports:
+      - 9000:9000
+  grpcclient:
+      build: ./client/
+      environment:
+        - API=${API}
+        - PORT=${PORT}
+      ports:
+        - ${PORT}:${PORT}
