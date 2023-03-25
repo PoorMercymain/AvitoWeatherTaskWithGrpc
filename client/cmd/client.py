@@ -73,17 +73,18 @@ def get_forecast():
 
 
 def check_user():
-    if request.headers["Own-Auth-UserName"] is None or request.headers["Own-Auth-UserName"] == "":
-        return jsonify({"Incorrect header": "Username header is empty"})
+    if "Own-Auth-UserName" in request.headers:
+        if request.headers["Own-Auth-UserName"] is None or request.headers["Own-Auth-UserName"] == "":
+            return jsonify({"Incorrect header": "Username header is empty"})
 
-    with grpc.insecure_channel('grpcserver:9000') as channel:
-        stub = auth_pb2_grpc.AuthStub(channel)
+        with grpc.insecure_channel('grpcserver:9000') as channel:
+            stub = auth_pb2_grpc.AuthStub(channel)
 
-        response = stub.CheckAuth(auth_pb2.AuthRequest(username=request.headers["Own-Auth-UserName"]))
+            response = stub.CheckAuth(auth_pb2.AuthRequest(username=request.headers["Own-Auth-UserName"]))
 
-        if response.exists:
-            return True
-        return False
+            if response.exists:
+                return True
+    return False
 
 
 if __name__ == "__main__":
