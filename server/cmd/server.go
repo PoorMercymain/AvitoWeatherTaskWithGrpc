@@ -42,14 +42,14 @@ func main() {
     api.RegisterAuthServer(s, srv)
 
     l, err := net.Listen("tcp", ":9000")
-	if err != nil {
-		log.Fatal(err)
-	}
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	fmt.Println("Сервер запущен")
+    fmt.Println("Сервер запущен")
     fmt.Println(srv.users)
 
-	if err := s.Serve(l); err != nil {
-		log.Fatal(err)
-	}
+    if err := s.Serve(l); err != nil {
+        log.Fatal(err)
+    }
 }
