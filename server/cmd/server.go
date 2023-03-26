@@ -8,6 +8,7 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
+
 )
 
 type GRPCServer struct {
@@ -33,8 +34,8 @@ func main() {
 
     users := make(map[string]struct{})
     users["Echo"] = struct{}{}
-	users["Mercy"] = struct{}{}
-	users["D.Va"] = struct{}{}
+    users["Mercy"] = struct{}{}
+    users["D.Va"] = struct{}{}
 
     srv := &GRPCServer{users: users}
 
